@@ -8,7 +8,13 @@ import {
   Search,
   ChevronLeft,
   ChevronRight,
-  Activity
+  Activity,
+  Container,
+  Target,
+  Brain,
+  Shield,
+  FileCheck,
+  Loader
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -18,6 +24,76 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
   const location = useLocation();
+  
+  // System status states - in a real app, this would come from a global state/context
+  const [systemStatus, setSystemStatus] = React.useState({
+    phase: 'scanning', // idle, opening, scanning, analyzing, exploiting, reporting
+    message: 'Scanning target containers',
+    progress: 65,
+    isActive: true
+  });
+
+  // Simulate status changes - in real app, this would be driven by actual system events
+  React.useEffect(() => {
+    const statusSequence = [
+      { phase: 'opening', message: 'Opening docker containers', progress: 20 },
+      { phase: 'scanning', message: 'Scanning target containers', progress: 45 },
+      { phase: 'analyzing', message: 'Deciding attack paths', progress: 65 },
+      { phase: 'exploiting', message: 'Generating exploits', progress: 80 },
+      { phase: 'reporting', message: 'Generating reports', progress: 95 },
+      { phase: 'idle', message: 'System ready', progress: 100 }
+    ];
+
+    let currentIndex = 0;
+    const interval = setInterval(() => {
+      if (currentIndex < statusSequence.length) {
+        setSystemStatus({
+          ...statusSequence[currentIndex],
+          isActive: statusSequence[currentIndex].phase !== 'idle'
+        });
+        currentIndex++;
+      } else {
+        // Reset to scanning after completing cycle
+        currentIndex = 1;
+      }
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const getStatusIcon = (phase: string) => {
+    switch (phase) {
+      case 'opening':
+        return Container;
+      case 'scanning':
+        return Target;
+      case 'analyzing':
+        return Brain;
+      case 'exploiting':
+        return Shield;
+      case 'reporting':
+        return FileCheck;
+      default:
+        return Activity;
+    }
+  };
+
+  const getStatusColor = (phase: string) => {
+    switch (phase) {
+      case 'opening':
+        return 'text-cyan';
+      case 'scanning':
+        return 'text-accent';
+      case 'analyzing':
+        return 'text-warning';
+      case 'exploiting':
+        return 'text-error';
+      case 'reporting':
+        return 'text-success';
+      default:
+        return 'text-success';
+    }
+  };
 
   const menuItems = [
     { path: '/', icon: Home, label: 'Home' },
@@ -71,10 +147,54 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
         </nav>
 
         <div className="p-4 border-t border-gray-700">
-          <div className={`flex items-center space-x-3 p-3 rounded-lg bg-gray-850 ${
+          <div className={`p-3 rounded-lg bg-gray-850 ${
             collapsed ? 'justify-center' : ''
           }`}>
-            <Activity className="w-5 h-5 text-success animate-pulse" />
+            <div className="flex items-center space-x-3">
+              {React.createElement(getStatusIcon(systemStatus.phase), {
+                className: `w-5 h-5 ${getStatusColor(systemStatus.phase)} ${
+                  systemStatus.isActive ? 'animate-pulse' : ''
+                }`
+              })}
+              {!collapsed && (
+                <div className="flex-1 animate-fade-in">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-sm font-medium text-white">System Status</span>
+                    {systemStatus.isActive && (
+                      <Loader className="w-3 h-3 text-accent animate-spin" />
+                    )}
+                  </div>
+                  <div className="text-xs text-gray-300 mb-2">{systemStatus.message}</div>
+                  {systemStatus.isActive && (
+                    <div className="w-full bg-gray-700 rounded-full h-1">
+                      <div 
+                        className={`h-1 rounded-full transition-all duration-500 ${
+                          systemStatus.phase === 'opening' ? 'bg-cyan' :
+                          systemStatus.phase === 'scanning' ? 'bg-accent' :
+                          systemStatus.phase === 'analyzing' ? 'bg-warning' :
+                          systemStatus.phase === 'exploiting' ? 'bg-error' :
+                          'bg-success'
+                        }`}
+                        style={{ width: `${systemStatus.progress}%` }}
+                      ></div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+            {collapsed && systemStatus.isActive && (
+              <div className="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-xs rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                {systemStatus.message}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </aside>
+  );
+};
+
+export default Sidebar;
             {!collapsed && (
               <div className="flex flex-col animate-fade-in">
                 <span className="text-sm font-medium text-white">AI Engine</span>
