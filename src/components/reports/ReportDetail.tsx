@@ -161,47 +161,6 @@ const ReportDetail: React.FC = () => {
           View All Findings →
         </button>
       </div>
-
-      {/* Attack Path Visualization */}
-      <div className="bg-secondary rounded-xl border border-gray-700 p-6">
-        <h3 className="text-lg font-semibold text-white mb-4">Attack Path</h3>
-        
-        <div className="space-y-3">
-          <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
-              <span className="text-white text-sm font-bold">1</span>
-            </div>
-            <div className="flex-1">
-              <p className="text-white text-sm font-medium">Initial Reconnaissance</p>
-              <p className="text-gray-400 text-xs">Port scanning revealed web services</p>
-            </div>
-          </div>
-          
-          <div className="ml-4 w-px h-4 bg-gray-600"></div>
-          
-          <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-warning rounded-full flex items-center justify-center">
-              <span className="text-white text-sm font-bold">2</span>
-            </div>
-            <div className="flex-1">
-              <p className="text-white text-sm font-medium">SQL Injection Discovery</p>
-              <p className="text-gray-400 text-xs">Login form vulnerable to SQLi</p>
-            </div>
-          </div>
-          
-          <div className="ml-4 w-px h-4 bg-gray-600"></div>
-          
-          <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-error rounded-full flex items-center justify-center">
-              <span className="text-white text-sm font-bold">3</span>
-            </div>
-            <div className="flex-1">
-              <p className="text-white text-sm font-medium">Database Compromise</p>
-              <p className="text-gray-400 text-xs">Full database access achieved</p>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };
