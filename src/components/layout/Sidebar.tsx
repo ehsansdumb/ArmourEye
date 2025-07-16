@@ -195,17 +195,3 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
 };
 
 export default Sidebar;
-            {!collapsed && (
-              <div className="flex flex-col animate-fade-in">
-                <span className="text-sm font-medium text-white">AI Engine</span>
-                <span className="text-xs text-success">Active</span>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </aside>
-  );
-};
-
-export default Sidebar;
