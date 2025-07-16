@@ -129,7 +129,7 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
                 <li key={item.path}>
                   <Link
                     to={item.path}
-                    className={`flex items-center space-x-3 p-3 rounded-lg transition-all duration-200 ${
+                    className={`flex items-center ${collapsed ? 'justify-center' : 'space-x-3'} p-3 rounded-lg transition-all duration-200 ${
                       isActive
                         ? 'bg-accent text-white shadow-lg shadow-accent/20'
                         : 'text-gray-300 hover:bg-gray-750 hover:text-white'
@@ -148,9 +148,9 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
 
         <div className="p-4 border-t border-gray-700">
           <div className={`p-3 rounded-lg bg-gray-850 ${
-            collapsed ? 'justify-center' : ''
+            collapsed ? 'flex justify-center' : ''
           }`}>
-            <div className="flex items-center space-x-3">
+            <div className={`flex items-center ${collapsed ? 'justify-center' : 'space-x-3'}`}>
               {React.createElement(getStatusIcon(systemStatus.phase), {
                 className: `w-5 h-5 ${getStatusColor(systemStatus.phase)} ${
                   systemStatus.isActive ? 'animate-pulse' : ''
@@ -182,11 +182,6 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
                 </div>
               )}
             </div>
-            {collapsed && systemStatus.isActive && (
-              <div className="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-xs rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                {systemStatus.message}
-              </div>
-            )}
           </div>
         </div>
       </div>
