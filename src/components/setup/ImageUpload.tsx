@@ -252,16 +252,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ setupData, setSetupData, onNe
         </div>
       )}
 
-      {/* Navigation */}
-      <div className="flex justify-end">
-        <button
-          onClick={onNext}
-          disabled={setupData.images.length === 0}
-          className="px-6 py-3 bg-accent hover:bg-accent-dark disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors"
-        >
-          Continue to Network Configuration
-        </button>
-      </div>
     </div>
   );
 };
