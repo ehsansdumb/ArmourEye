@@ -14,7 +14,8 @@ import {
   Brain,
   Shield,
   FileCheck,
-  Loader
+  Loader,
+  Wrench
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -97,7 +98,7 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
 
   const menuItems = [
     { path: '/', icon: Home, label: 'Home' },
-    { path: '/setup', icon: Settings, label: 'Setup' },
+    { path: '/setup', icon: Wrench, label: 'Setup' },
     { path: '/scan', icon: Zap, label: 'Scan' },
     { path: '/reports', icon: FileText, label: 'Reports' },
     { path: '/settings', icon: Search, label: 'Settings' },
