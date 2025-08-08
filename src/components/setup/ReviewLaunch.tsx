@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Play, CheckCircle, Container, Network, Plug, Zap } from 'lucide-react';
+import { Play, Container, Network, Plug, Zap } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface ReviewLaunchProps {

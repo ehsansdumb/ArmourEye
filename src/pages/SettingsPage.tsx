@@ -1,5 +1,5 @@
 import React from 'react';
-import { Settings, User, Shield, Database, Bell, Palette, Globe, Lock } from 'lucide-react';
+import { User, Shield, Database, Bell, Palette, Globe, Lock } from 'lucide-react';
 
 const SettingsPage: React.FC = () => {
   return (

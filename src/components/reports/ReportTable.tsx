@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Download, Eye, Calendar, Target, AlertTriangle, CheckCircle } from 'lucide-react';
+import { Download, Eye, Calendar, Target } from 'lucide-react';
 
 const ReportTable: React.FC = () => {
   const [selectedReport, setSelectedReport] = useState<string | null>('RPT-2024-001');

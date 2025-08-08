@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Settings, Play, Pause, Square, Zap, Shield, Search } from 'lucide-react';
 
-const ScanProfile: React.FC = () => {
+const ScanManager: React.FC = () => {
   const [selectedProfile, setSelectedProfile] = useState('standard');
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [scanStatus, setScanStatus] = useState('idle'); // idle, running, paused
@@ -46,12 +46,12 @@ const ScanProfile: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
-      {/* Scan Profile Selection */}
-      <div className="bg-secondary rounded-xl border border-gray-700 p-6">
-        <h2 className="text-xl font-semibold text-white mb-4">Scan Profile</h2>
-        
-        <div className="space-y-3">
+    <div className="bg-secondary rounded-xl border border-gray-700 p-6 space-y-8">
+      {/* Scan Manager Section */}
+      <div>
+        <h2 className="text-xl font-semibold text-white mb-4">Scan Manager</h2>
+        {/* Scan Profile Selection */}
+        <div className="space-y-3 mb-6">
           {profiles.map((profile) => (
             <label
               key={profile.id}
@@ -82,16 +82,14 @@ const ScanProfile: React.FC = () => {
             </label>
           ))}
         </div>
-
         {/* Advanced Settings Toggle */}
         <button
           onClick={() => setShowAdvanced(!showAdvanced)}
-          className="mt-4 flex items-center space-x-2 text-accent hover:text-accent-light transition-colors"
+          className="mt-2 flex items-center space-x-2 text-accent hover:text-accent-light transition-colors"
         >
           <Settings className="w-4 h-4" />
           <span className="text-sm">Advanced Settings</span>
         </button>
-
         {/* Advanced Settings Panel */}
         {showAdvanced && (
           <div className="mt-4 p-4 bg-gray-850 rounded-lg animate-fade-in">
@@ -112,7 +110,6 @@ const ScanProfile: React.FC = () => {
                   <span>10</span>
                 </div>
               </div>
-
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
                   Timeout (seconds)
@@ -123,7 +120,6 @@ const ScanProfile: React.FC = () => {
                   className="w-full px-3 py-2 bg-secondary border border-gray-600 rounded-lg text-white focus:outline-none focus:border-accent"
                 />
               </div>
-
               <div className="flex items-center space-x-2">
                 <input
                   type="checkbox"
@@ -134,7 +130,6 @@ const ScanProfile: React.FC = () => {
                   Enable aggressive scanning
                 </label>
               </div>
-
               <div className="flex items-center space-x-2">
                 <input
                   type="checkbox"
@@ -150,11 +145,8 @@ const ScanProfile: React.FC = () => {
           </div>
         )}
       </div>
-
-      {/* Action Buttons */}
-      <div className="bg-secondary rounded-xl border border-gray-700 p-6">
-        <h2 className="text-xl font-semibold text-white mb-4">Scan Control</h2>
-        
+      {/* Scan Control Section (merged) */}
+      <div>
         <div className="flex space-x-3">
           {scanStatus === 'idle' && (
             <button
@@ -165,7 +157,6 @@ const ScanProfile: React.FC = () => {
               <span>Start Scan</span>
             </button>
           )}
-
           {scanStatus === 'running' && (
             <>
               <button
@@ -184,7 +175,6 @@ const ScanProfile: React.FC = () => {
               </button>
             </>
           )}
-
           {scanStatus === 'paused' && (
             <>
               <button
@@ -204,7 +194,6 @@ const ScanProfile: React.FC = () => {
             </>
           )}
         </div>
-
         {scanStatus !== 'idle' && (
           <div className="mt-4 p-3 bg-gray-850 rounded-lg">
             <div className="flex items-center space-x-2">
@@ -222,4 +211,4 @@ const ScanProfile: React.FC = () => {
   );
 };
 
-export default ScanProfile;
+export default ScanManager;

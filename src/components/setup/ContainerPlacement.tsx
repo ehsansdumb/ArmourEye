@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plus, Trash2, Network, Container } from 'lucide-react';
+import { Plus, Trash2, Container } from 'lucide-react';
 
 interface ContainerPlacementProps {
   setupData: any;
