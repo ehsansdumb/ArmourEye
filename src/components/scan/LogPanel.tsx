@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Terminal, Download, X, Search, Filter } from 'lucide-react';
+import { Terminal, Download, X } from 'lucide-react';
 
 const LogPanel: React.FC = () => {
   const logRef = useRef<HTMLDivElement>(null);
@@ -106,7 +106,7 @@ const LogPanel: React.FC = () => {
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-2">
           <Terminal className="w-5 h-5 text-accent" />
-          <h2 className="text-xl font-semibold text-white">Live Scan Logs</h2>
+          <h2 className="text-xl font-semibold text-white">Live Logs</h2>
         </div>
         
         <div className="flex items-center space-x-3">

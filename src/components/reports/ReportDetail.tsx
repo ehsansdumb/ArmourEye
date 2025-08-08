@@ -1,5 +1,5 @@
 import React from 'react';
-import { Target, Clock, AlertTriangle, Shield, TrendingUp, Download, Share } from 'lucide-react';
+import { Target, Clock, AlertTriangle, Download, Share } from 'lucide-react';
 
 const ReportDetail: React.FC = () => {
   const selectedReport = {

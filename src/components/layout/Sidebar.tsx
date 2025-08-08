@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
   Home, 
-  Settings, 
   Zap, 
   FileText, 
   Search,
@@ -15,7 +14,8 @@ import {
   Shield,
   FileCheck,
   Loader,
-  Wrench
+  Wrench,
+  Settings
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -99,9 +99,9 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
   const menuItems = [
     { path: '/', icon: Home, label: 'Home' },
     { path: '/setup', icon: Wrench, label: 'Setup' },
-    { path: '/scan', icon: Zap, label: 'Scan' },
+    { path: '/scan', icon: Activity, label: 'Orchestrator' },
     { path: '/reports', icon: FileText, label: 'Reports' },
-    { path: '/settings', icon: Search, label: 'Settings' },
+    { path: '/settings', icon: Settings, label: 'Settings' },
   ];
 
   return (

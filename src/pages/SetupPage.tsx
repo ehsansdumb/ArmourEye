@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CheckCircle, Circle } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
 import ImageUpload from '../components/setup/ImageUpload';
 import NetworkConfig from '../components/setup/NetworkConfig';
 import ContainerPlacement from '../components/setup/ContainerPlacement';
@@ -52,16 +52,16 @@ const SetupPage: React.FC = () => {
 
       {/* Progress Stepper */}
       <div className="bg-secondary rounded-xl border border-gray-700 p-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-nowrap items-center justify-between overflow-x-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900">
           {steps.map((step, index) => (
-            <div key={step.id} className="flex items-center">
-              <div className="flex flex-col items-center">
-                <div className={`flex items-center justify-center w-10 h-10 rounded-full border-2 transition-all duration-200 ${
+            <React.Fragment key={step.id}>
+              <div className="flex flex-col items-center min-w-[120px] px-2">
+                <div className={`flex items-center justify-center w-10 h-10 rounded-full border-2 transition-all duration-200 mb-2 ${
                   currentStep > step.id
                     ? 'bg-success border-success text-white'
                     : currentStep === step.id
-                    ? 'bg-accent border-accent text-white'
-                    : 'border-gray-600 text-gray-400'
+                    ? 'bg-accent border-accent text-white shadow-lg shadow-accent/30'
+                    : 'border-gray-600 text-gray-400 bg-gray-800'
                 }`}>
                   {currentStep > step.id ? (
                     <CheckCircle className="w-6 h-6" />
@@ -69,23 +69,21 @@ const SetupPage: React.FC = () => {
                     <span className="text-sm font-semibold">{step.id}</span>
                   )}
                 </div>
-                <div className="mt-2 text-center">
+                <div className="text-center">
                   <p className={`text-sm font-medium ${
                     currentStep >= step.id ? 'text-white' : 'text-gray-400'
                   }`}>
                     {step.title}
                   </p>
-                  <p className="text-xs text-gray-500 mt-1 max-w-24">
+                  <p className="text-xs text-gray-500 mt-1 max-w-28 mx-auto">
                     {step.description}
                   </p>
                 </div>
               </div>
               {index < steps.length - 1 && (
-                <div className={`w-16 h-px mx-4 ${
-                  currentStep > step.id ? 'bg-success' : 'bg-gray-600'
-                }`}></div>
+                <div className="h-1 w-12 bg-gray-600 mx-2 self-center min-w-[24px]"></div>
               )}
-            </div>
+            </React.Fragment>
           ))}
         </div>
       </div>
