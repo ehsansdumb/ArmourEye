@@ -1,37 +1,39 @@
 import React from 'react';
-import { Settings, Shield } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Settings, Shield, LogOut, User } from 'lucide-react';
+import { useAuth } from '../../contexts/AuthContext';
 
 const Header: React.FC = () => {
+  const { user, logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-secondary border-b border-gray-700 h-16">
+    <header className="fixed top-0 left-0 right-0 h-16 bg-secondary border-b border-gray-700 z-50">
       <div className="flex items-center justify-between h-full px-6">
-        <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
-          <div className="relative">
+        <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2">
             <Shield className="w-8 h-8 text-accent" />
-            <div className="absolute -top-1 -right-1 w-3 h-3 bg-cyan rounded-full animate-pulse"></div>
+            <h1 className="text-xl font-bold text-white">ArmourEye</h1>
           </div>
-          <span className="text-xl font-bold bg-gradient-to-r from-accent to-cyan bg-clip-text text-transparent">
-            ArmourEye
-          </span>
-        </Link>
+        </div>
 
         <div className="flex items-center space-x-4">
-          <div className="hidden md:flex items-center space-x-4 text-sm text-gray-300">
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-success rounded-full animate-pulse"></div>
-              <span>System Online</span>
-            </div>
-            <div className="text-gray-500">|</div>
-            <span>AI Engine Ready</span>
+          <div className="flex items-center space-x-2 text-gray-300">
+            <User className="w-4 h-4" />
+            <span className="text-sm">{user?.username}</span>
+            <span className="text-xs text-gray-500">({user?.role})</span>
           </div>
           
-          <Link
-            to="/settings"
-            className="p-2 rounded-lg hover:bg-gray-750 transition-colors"
+          <button
+            onClick={handleLogout}
+            className="flex items-center space-x-2 px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors"
+            title="Logout"
           >
-            <Settings className="w-5 h-5 text-gray-400 hover:text-white" />
-          </Link>
+            <LogOut className="w-4 h-4" />
+            <span className="text-sm">Logout</span>
+          </button>
         </div>
       </div>
     </header>
